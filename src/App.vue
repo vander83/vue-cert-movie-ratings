@@ -8,7 +8,6 @@ import { items } from "./movies.json";
 import { StarIcon } from "@heroicons/vue/24/solid";
 
 const movies = ref(items);
-
 </script>
 
 <template>
@@ -17,21 +16,34 @@ const movies = ref(items);
     <main class="movies-container">
       <div class="movies">
         <div class="movie" v-for="movie in items" :key="movie.id">
-          <div class="image-section">
-            <img :src="movie.image" alt="">
+          <div
+            class="image-section"
+            :style="{
+              background: `url(${movie.image}) top center/cover no-repeat`,
+            }"
+          >
+            <!-- <img :src="movie.image" alt=""> -->
           </div>
           <div class="text-section">
             <h3 class="movie-name">{{ movie.name }}</h3>
             <div class="movie-genre-list">
-              <div class="movie-genre" v-for="genre in movie.genres" :key="`${movie.id}-${genre}`">
-               <span>{{ genre }}</span>
+              <div
+                class="movie-genre"
+                v-for="genre in movie.genres"
+                :key="`${movie.id}-${genre}`"
+              >
+                <span>{{ genre }}</span>
               </div>
             </div>
             <div class="movie-description">{{ movie.description }}</div>
             <div class="movie-rating">
               <span>Rating ({{ movie.rating }}/5)</span>
               <div class="stars">
-                <StarIcon class="star" v-for="star in movie.rating" :key="`star-${star}`"/>
+                <StarIcon
+                  class="star"
+                  v-for="star in movie.rating"
+                  :key="`star-${star}`"
+                />
               </div>
             </div>
           </div>
@@ -59,17 +71,14 @@ const movies = ref(items);
 .movie {
   width: 300px;
   height: max-content;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top center;
 }
 
 .image-section {
   width: 100%;
   height: 420px;
-}
-
-.image-section img {
-  width: 100%;
-  max-height: 100%;
-  object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
 
